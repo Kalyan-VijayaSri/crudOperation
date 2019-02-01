@@ -1,0 +1,25 @@
+version: "3.3"
+
+services:
+
+# NodeJS App's Container
+ app:
+  
+  ports:
+    - 8080:4000
+  volumes:
+    - ./netbanking:/code
+  tty: true
+  privileged: true
+  hostname: node_app
+
+# MongoDB container
+ mongodb:
+  
+  hostname: mongodb 
+  tty: true
+  privileged: true
+
+  
+
+   

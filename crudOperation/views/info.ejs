@@ -1,0 +1,144 @@
+<html>
+
+<head>
+  <br>
+  <p>TABLE INFORMATION</p>
+  <style>
+    body{
+             background-image:url("https://hdqwalls.com/download/simple-gray-abstract-background-wi-1920x1080.jpg");
+             background-repeat:no-repeat;
+             background-size:cover; text-align:center;
+          
+          }
+          form{
+            color:dodgerblue;
+            font-family: 'Times New Roman', Times, serif; 
+            font-size:25px;
+          }
+          table,tr,th,td{
+            color: orangered;
+            border: 5px whitesmoke;
+            text-align: center;
+            border-style: double;
+          }
+          p{
+            color: coral;
+            font-size: 25px;
+            text-align: center;
+
+          }
+          input[type=submit]:hover {
+          background-color: #45a049;
+          }
+
+        </style>
+
+  <meta charset="utf-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script type="text/javascript" language="javascript">
+    $(document).ready(function () {
+      $("#save").click(function () {
+        var person = {};
+        person.oldname = $("#oldname").val();
+        person.newname = $("#newname").val();
+        $.ajax({
+          type: "PUT",
+          url: "/putData",
+          data: person,
+          success: function (data) {
+            if(data.success==false){
+            alert(data.message);}
+            else
+            {
+            alert("updated successfully");
+            }
+          },
+          error: function (err) {
+            console.log(err);
+          }
+        });
+      });
+      $("#save1").click(function () {
+        var person1 = {};
+        person1.firstname = $("#fnames").val();
+        $.ajax({
+          url: "/deleteData",
+          type: "DELETE",
+          data: person1,
+          success: function (data) {
+            //console.log(data);
+            alert(data);
+          },
+          error: function (err) {
+            console.log(err);
+          }
+        });
+      });
+    });
+
+  </script>
+</head>
+
+<body>
+  <table border="5px" width="70%" align="center">
+    <tr>
+      <th>firstname</th>
+      <th>lastname</th>
+    </tr>
+    <% for(var i=0;i < names.length;i++){%>
+    <tr>
+      <td>
+        <%=names[i].firstname%>
+      </td>
+      <td>
+        <%=names[i].lastname%>
+      </td>
+    </tr>
+    <%}%>
+  </table>
+
+  <br>
+  <br><br>
+  <!-- Replacing oldname with newname -->
+
+  <i><b>
+      <p>Adding,Deleting and Updating table information</p>
+    </b></i>
+
+  <form>
+    <div class="container-fluid" style="height:20px">
+      <label for="usrname">Oldname:</label>
+      <input type="text" name="oldname" id="oldname" required>
+      <label for="usrname">Newname:</label>
+      <input type="text" name="newname" id="newname" required>
+      <button type="button" class="btn btn-lg" id="save"> Edit</button>
+  </form>
+  </div>
+
+  <br>
+  <!-- Adding firstname and lastname -->
+  <form action="/addData" method="post">
+    <div class="container-fluid" style="height:20px">
+      <label for="usrname">Firstname:</label>
+      <input type="text" name="firstname" id="firstname" required>
+      <label for="usrname">Lastname:</label>
+      <input type="text" name="lastname" required>
+      <input type="submit" class="btn btn-lg" id="save" value="ADD">
+    </div>
+  </form>
+  <br>
+  <!-- Deleting name by comparing it with firstname -->
+  <form id="para3">
+    <div class="container-fluid" style="height:20px">
+      <label for="usrname">Firstname:</label>
+      <input type="text" name="firstname" id="fnames">
+      <input type="submit" id="save1" value="Delete">
+  </form>
+</body>
+
+
+</html>
