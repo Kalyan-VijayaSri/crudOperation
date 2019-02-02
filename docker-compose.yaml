@@ -4,7 +4,7 @@ services:
 
 # NodeJS App's Container
  app:
-  
+  image: 192.168.1.19/crudapp:v1
   ports:
     - 8080:4000
   volumes:
@@ -15,7 +15,7 @@ services:
 
 # MongoDB container
  mongodb:
-  
+  image: 192.168.1.19/crudmongo:v2
   hostname: mongodb 
   tty: true
   privileged: true
